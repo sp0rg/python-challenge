@@ -66,11 +66,11 @@ for r in range(len(bankRevenue)):
         monthDec = bankMonths[r]
 
 ###### AVERAGE SECTION
-avgrevChange = [] #used to create a list of revenue differences
-moreAvg = 0 #used to basically sum all of the revenue changes in avgrevChange
-somewhatAvg = 0 #used to actually (finally) calculate the average
-bobeatsBroccoli = 0 #trash variable used to populate avgrevChange
-removeCarrots = 0 #tired of broccoli? bring on the carrots! Need this to subtract the last row from the first row
+avgrevChange = []
+moreAvg = 0
+somewhatAvg = 0
+bobeatsBroccoli = 0 #there are only so many ways to say average
+removeCarrots = 0 #tired of broccoli? bring on the carrots!
 
 #calculation to add each iteration of difference
 for r in range(len(bankRevenue)): 
@@ -82,19 +82,13 @@ for r in range(len(bankRevenue)):
 #assumed that subtracting first row from last row it would throw the sum off later
 #dug around on the interwebs a bit, but it makes sense
 #zero indexed takes the first row minus the very last row (-1)
-#removeCarrots = bankRevenue[0] - bankRevenue[-1]
+removeCarrots = bankRevenue[0] - bankRevenue[-1]
 
 #This gets our net - still need to remove those carrots
 for r in range(len(avgrevChange)):
     moreAvg += avgrevChange[r]
 
-#kept coming up with zero
-#assumed that subtracting first row from last row it would throw the sum off later
-#dug around on the interwebs a bit, but it makes sense
-#zero indexed takes the first row minus the very last row (-1)
-removeCarrots = bankRevenue[0] - bankRevenue[-1]
-
-#removes the carrots to get a proper net value
+#takes removes the carrots to get a proper net value
 evenmoreAvg = moreAvg - removeCarrots
 
 #divide for average, then round and all that jazz
@@ -105,14 +99,13 @@ somewhatRnd = str(round(somewhatAvg,2))
 
 ###### Print Section
 print("Financial Analysis")
-print('-' * 28)
+print("----------------------------")
 print(f"Total Months: {totalMonths}")
 print(f"Total: ${netPL}")
 print(f"Average Change: ${somewhatRnd}")
 print(f"Greatest Increase in Profits: {monthInc} (${incMost})")
 print(f"Greatest Decrease in Profits: {monthDec} (${decMost})")
-
-###### Output 
+ 
 with open(output_data_csv, mode='w', newline='') as summary_txt:
     writer = csv.writer(summary_txt)
 
@@ -126,4 +119,5 @@ with open(output_data_csv, mode='w', newline='') as summary_txt:
         [f"Greatest Decrease in Profits: {monthDec} (${decMost})"]
     ])
 
-    
+    #* In addition, your final script should both print the analysis to the terminal 
+    ## and export a text file with the results.
